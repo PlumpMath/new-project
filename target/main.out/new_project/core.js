@@ -15,14 +15,14 @@ new_project.core.rotate_cube = ((function (m_main,m_data,canvas,m_config,m_trans
 return (function new_project$core$start_$_rotate_cube(val){
 new_project.core.cube = m_scenes.get_object_by_name("Cube");
 
-return m_trans.set_rotation_euler(new_project.core.cube,(0),(0),(2000));
+return m_trans.set_rotation_euler(new_project.core.cube,(0),(0),val);
 });})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time))
 ;
 
 new_project.core.stageload_cb = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time){
 return (function new_project$core$start_$_stageload_cb(data_id,success){
 if(cljs.core.truth_(m_data.is_primary_loaded())){
-return m_time.animate((0),(2000),(200000),new_project.core.rotate_cube);
+return m_time.animate((0),(2000),(800000),new_project.core.rotate_cube);
 } else {
 return null;
 }

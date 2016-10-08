@@ -17,11 +17,12 @@
 
   (defn rotate-cube [val]
     (def cube (.get-object-by-name m-scenes "Cube"))
-    (.set-rotation-euler m-trans cube 0 0 2000))
+    (.set-rotation-euler m-trans cube 0 0 val))
 
   (defn stageload-cb [data-id success]
     (when (.is-primary-loaded m-data)
-              (.animate m-time 0 2000 200000 rotate-cube)))
+              ;;This will spin for about 13 minutes.
+              (.animate m-time 0 2000 800000 rotate-cube)))
 
   (defn loaded-cb [data-id success]
     "Needed for basic scene loading.
