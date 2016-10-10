@@ -11,28 +11,31 @@ var m_config = b4w.require("config");
 var m_trans = b4w.require("transform");
 var m_scenes = b4w.require("scenes");
 var m_time = b4w.require("time");
-new_project.core.rotate_cube = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time){
+var m_controls = b4w.require("controls");
+new_project.core.rotate_cube = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time,m_controls){
 return (function new_project$core$start_$_rotate_cube(val){
 new_project.core.cube = m_scenes.get_object_by_name("Cube");
 
-return m_trans.set_rotation_euler(new_project.core.cube,(0),(0),val);
-});})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time))
+return m_trans.set_rotation_euler(new_project.core.cube,(0),(0),(val / (4)));
+});})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time,m_controls))
 ;
 
-new_project.core.stageload_cb = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time){
+new_project.core.stageload_cb = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time,m_controls){
 return (function new_project$core$start_$_stageload_cb(data_id,success){
 if(cljs.core.truth_(m_data.is_primary_loaded())){
-return m_time.animate((0),(2000),(800000),new_project.core.rotate_cube);
+var timeline_sensor = m_controls.create_timeline_sensor();
+var cube_manifold = m_controls.create_sensor_manifold(null,"m_main",m_controls.CT_CONTINUOUS,cljs.core.clj__GT_js.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [timeline_sensor], null)),new_project.core.rotate_cube);
+return null;
 } else {
 return null;
 }
-});})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time))
+});})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time,m_controls))
 ;
 
-new_project.core.loaded_cb = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time){
+new_project.core.loaded_cb = ((function (m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time,m_controls){
 return (function new_project$core$start_$_loaded_cb(data_id,success){
 return "Needed for basic scene loading.\n    Data-id seems to be the thread the data is loaded. Success is a boolean for\n    whether or not the scene loading was successful.";
-});})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time))
+});})(m_main,m_data,canvas,m_config,m_trans,m_scenes,m_time,m_controls))
 ;
 
 m_config.set("console_verbose",true);
